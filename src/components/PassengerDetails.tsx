@@ -26,6 +26,9 @@ const PassengerDetails: React.FC = () => {
   const [contactError, setContactError] = useState<string>('');
   const [emailError, setEmailError] = useState<string>('');
 
+  const [savedPassengers, setSavedPassengers] = useState<Passenger[]>([]);
+
+
   const validateField = (field: keyof Passenger, value: string, index: number) => {
     let error = '';
     switch (field) {
@@ -97,17 +100,40 @@ const PassengerDetails: React.FC = () => {
   };
 
   return (
-    <div className="p-4">
-      <div className='flex p-4'>Passenger Details</div>
+    <>
+      <h2>Passenger Details</h2>
+
+      {/* Saved Passengers */}
+      <section className='p-4 rounded-xl shadow-md overflow-visible'>
+        {
+          savedPassengers.length===0?(
+            <span>
+              No saved Passengers.
+            </span>
+          ):(
+            <div className='flex justify-start items-center flex-wrap gap-10'>
+              {Object.entries(savedPassengers).map((id, x)=>(
+                <>
+                  {/* <input type="radio" id={x.fullName} />
+                  <label htmlFor={x.fullName}>{x.fullName}</label> */}
+                
+                </>
+              ))}
+            </div>
+          )
+        }
+
+      </section>
       {formData.map((passenger, index) => (
-        <div key={index} className="mb-6 relative rounded-md shadow-sm bg-white p-4">
-          <h2 className="text-lg font-medium mb-4 text-gray-700 flex">Passenger {index + 1} Details</h2>
-          <div className="space-y-4 flex gap-10">
-            <div className='flex flex-col relative'>
-              <div className='flex'>Full name</div>
+        <div key={index} className="mb-6 relative rounded-md shadow-sm bg-white">
+          <div className="text-lg font-medium">Passenger {index + 1} Details</div>
+          <div className="flex gap-x-10 gap-y-5 w-full flex-wrap">
+            <div className='flex flex-col gap-1 grow max-w-[30vw] min-w-60'>
+              <label htmlFor={`Detail${index}Name`}>Full name</label>
               <input
                 type="text"
                 name="fullName"
+                id={`Detail${index}Name`}
                 placeholder="Full Name"
                 value={passenger.fullName}
                 onChange={(e) => handleInputChange(index, 'fullName', e.target.value)}
@@ -120,11 +146,12 @@ const PassengerDetails: React.FC = () => {
               )}
               {errors[index].fullName && <p className="text-xs text-red-500 mt-1">{errors[index].fullName}</p>}
             </div>
-            <div className='flex flex-col relative'>
-              <div className='flex'>Date of Birth</div>
+            <div className='flex flex-col gap-1 grow max-w-[30vw] min-w-60'>
+              <label htmlFor={`Detail${index}DOB`}>Date of Birth</label>
               <input
                 type="date"
                 name="dateOfBirth"
+                id={`Detail${index}DOB`}
                 placeholder="Date of Birth"
                 value={passenger.dateOfBirth}
                 onChange={(e) => handleInputChange(index, 'dateOfBirth', e.target.value)}
@@ -137,21 +164,25 @@ const PassengerDetails: React.FC = () => {
               )}
               {errors[index].dateOfBirth && <p className="text-xs text-red-500 mt-1">{errors[index].dateOfBirth}</p>}
             </div>
-            <div className='flex flex-col'>
-              <div className='flex'>Gender</div>
-              <div className="flex items-center space-x-4">
+            <div className='flex flex-col gap-1 grow max-w-[30vw] min-w-60'>
+              <label>Gender</label>
+              <div className="flex flex-row gap-4">
                 {['Male', 'Female', 'Others'].map((genderOption) => (
-                  <label key={genderOption} className="flex items-center space-x-2 text-gray-700">
-                    <input
-                      type="radio"
-                      name={`gender-${index}`}
-                      value={genderOption}
-                      checked={passenger.gender === genderOption}
-                      onChange={(e) => handleInputChange(index, 'gender', e.target.value)}
-                      className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                    />
-                    <span>{genderOption}</span>
-                  </label>
+                  <div className='space-x-2'>
+                      <input
+                        type="radio"
+                        id={`Detail${index}Gender${genderOption}`}
+                        name={`Detail${index}Gender${genderOption}`}
+                        value={genderOption}
+                        checked={passenger.gender === genderOption}
+                        onChange={(e) => handleInputChange(index, 'gender', e.target.value)}
+                        className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                      />
+                    <label key={`Detail${index}Gender${genderOption}`} className="text-sm font-normal">
+                      {genderOption}
+                    </label>
+                  
+                  </div>
                 ))}
               </div>
               {errors[index].gender && <p className="text-xs text-red-500 mt-1">{errors[index].gender}</p>}
@@ -175,16 +206,17 @@ const PassengerDetails: React.FC = () => {
         + Add a Passenger
       </button>
       
-      <div className='flex gap-10 p-4'>
+      <div className='flex gap-10'>
         <div className='relative'>
-          <div className='flex'>Phone Number</div>
+          <label htmlFor='phoneNumber' className='flex'>Phone Number</label>
           <div className='flex'>
             <div className="h-14 px-4 py-2 border border-gray-300 rounded-l-md focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400">
               +91
             </div>
             <input
               type="text"
-              name="contact"
+              inputMode='numeric'
+              id="phoneNumber"
               placeholder="Phone Number"
               value={contact}
               onChange={(e) => {
@@ -202,10 +234,10 @@ const PassengerDetails: React.FC = () => {
           {contactError && <p className="text-xs text-red-500 mt-1">{contactError}</p>}
         </div>
         <div className='relative'>
-          <div className='flex'>Email Address</div>
+          <label htmlFor='email' className='flex'>Email Address</label>
           <input
             type="email"
-            name="email"
+            id="email"
             placeholder="Email"
             value={email}
             onChange={(e) => {
@@ -222,7 +254,7 @@ const PassengerDetails: React.FC = () => {
           {emailError && <p className="text-xs text-red-500 mt-1">{emailError}</p>}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
