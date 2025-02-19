@@ -1,0 +1,8 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path id="Subtract" fill-rule="evenodd" clip-rule="evenodd" d="M0 4.98452L19.3061 14.2663C20.7917 14.9805 20.824 17.0842 19.3612 17.8438L0.330559 27.7251C1.67046 30.2671 4.33896 32 7.4122 32H23.4122C27.8305 32 31.4122 28.4183 31.4122 24V8C31.4122 3.58172 27.8305 0 23.4122 0H7.4122C4.06073 0 1.19061 2.06089 0 4.98452Z" fill="url(#paint0_linear_11_2245)"/>
+<defs>
+<linearGradient id="paint0_linear_11_2245" x1="15.7061" y1="0" x2="15.7061" y2="32" gradientUnits="userSpaceOnUse">
+<stop offset="1" stop-color="#1E1E1E"/>
+</linearGradient>
+</defs>
+</svg>
