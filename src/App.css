@@ -1,12 +1,31 @@
 h1{
-  @apply text-black font-sans text-2xl font-bold leading-9 tracking-normal;
+  @apply text-black  text-2xl font-bold leading-9 tracking-normal;
 }
 
 h2{
-  @apply text-black font-sans text-xl font-bold leading-9 tracking-normal;
+  @apply text-black text-xl font-bold leading-9 tracking-normal;
 }
+
+h3{
+  @apply font-semibold text-lg;
+}
+
 
 label{
   @apply font-semibold text-sm;
 
+}
+
+#banner{
+  -webkit-mask-image: url('/public/assets/svgs/banner-bg-clip.svg');
+  -webkit-mask-size: 100% 100%;
+  mask-image: url('/public/assets/svgs/banner-bg-clip.svg');
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  mask-clip: content-box;
+  background-image: url('/public/assets/svgs/banner-bg-clip.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+  @apply w-full h-32 ;
 }

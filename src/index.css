@@ -6,7 +6,7 @@
 
 /* Reset */
 *{
-  @apply p-0 m-0 overflow-visible;
+  @apply p-0 m-0 overflow-visible font-sans;
 }
 
 body {
