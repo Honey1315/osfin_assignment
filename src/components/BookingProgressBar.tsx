@@ -1,8 +1,14 @@
 import React from 'react'
 
-type Props = {}
+interface bookingProgressBarProps {
+  stepProgress : number
+}
 
-const BookingProgressBar = (props: Props) => {
+const BookingProgressBar : React.FC<bookingProgressBarProps> = ({stepProgress}) => {
+  const PassengerDetails = ['In Progress', 'Completed', 'Completed'];
+  const AddiInfo = ['Pending', 'In Progress', 'Completed'];
+  const AddiInfoStyle = ['text-[#A8A8A8] text-center font-open-sans text-xs font-semibold leading-normal', 'text-[#0368C8] text-center font-open-sans text-xs font-semibold leading-normal', 'text-[#008C76] text-center font-open-sans text-xs font-semibold leading-normal'];
+  const review = ['Pending', 'Pending', 'In Progress'];
   return (
     <div className="flex relative items-center justify-between w-full max-w-4xl self-center">
       {/* Step 1 */}
@@ -11,7 +17,7 @@ const BookingProgressBar = (props: Props) => {
           1
         </div>
         <p className="mt-2 text-sm font-semibold text-black">Passenger Details</p>
-        <p className="text-xs text-gray-500">Pending</p>
+        <p className={stepProgress === 1 ? 'text-[#0368C8] text-center font-open-sans text-xs font-semibold leading-normal' : 'text-[#008C76] text-center font-open-sans text-xs font-semibold leading-normal'}>{PassengerDetails[stepProgress-1]}</p>
       </div>
 
       {/* Step 2 */}
@@ -20,7 +26,7 @@ const BookingProgressBar = (props: Props) => {
           2
         </div>
         <p className="mt-2 text-sm font-semibold text-black">Additional Information</p>
-        <p className="text-xs text-gray-500">Pending</p>
+        <p className={AddiInfoStyle[stepProgress-1]}>{AddiInfo[stepProgress-1]}</p>
       </div>
 
       {/* Step 3 */}
@@ -29,7 +35,7 @@ const BookingProgressBar = (props: Props) => {
           3
         </div>
         <p className="mt-2 text-sm font-semibold text-black">Review and Submit</p>
-        <p className="text-xs text-gray-500">Pending</p>
+        <p className={stepProgress === 3 ? 'text-[#0368C8] text-center font-open-sans text-xs font-semibold leading-normal' : 'text-[#A8A8A8] text-center font-open-sans text-xs font-semibold leading-normal'}>{review[stepProgress-1]}</p>
       </div>
 
       {/* Joining line */}

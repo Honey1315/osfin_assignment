@@ -6,12 +6,6 @@ interface PassengerInfo {
   gender: string;
 }
 
-interface AdditionalInfoType {
-  mealPreference: string;
-  seatPreference: string;
-  specialAssistance: boolean;
-  additionalRequests: string;
-}
 
 interface FlightDetails {
   boardingStation: string;
@@ -29,10 +23,9 @@ interface FlightDetails {
 interface ReviewProps {
   flightDetails: FlightDetails;
   passengerDetails: PassengerInfo[];
-  additionalInfo: AdditionalInfoType;
 }
 
-const Review: React.FC<ReviewProps> = ({ flightDetails, passengerDetails, additionalInfo }) => {
+const Review: React.FC<ReviewProps> = ({ flightDetails, passengerDetails }) => {
   return (
     <div className='flex flex-col gap-6 p-8 w-full'>
       <div>
@@ -79,28 +72,6 @@ const Review: React.FC<ReviewProps> = ({ flightDetails, passengerDetails, additi
               <p className="text-black font-open-sans text-sm font-semibold leading-normal">{passenger.gender}</p>
             </div>
           ))}
-        </div>
-      </div>
-
-      <div>
-        <h1 className='flex text-black font-open-sans text-lg font-semibold leading-normal'>Additional Information</h1>
-        <div className="bg-gray-100 rounded-lg p-5">
-          <div className="flex justify-between">
-            <p className="text-[#626262] font-open-sans text-sm font-normal leading-normal">Meal Preference</p>
-            <p className="text-black font-open-sans text-sm font-semibold leading-normal">{additionalInfo.mealPreference}</p>
-          </div>
-          <div className="flex justify-between">
-            <p className="text-[#626262] font-open-sans text-sm font-normal leading-normal">Seat Preference</p>
-            <p className="text-black font-open-sans text-sm font-semibold leading-normal">{additionalInfo.seatPreference}</p>
-          </div>
-          <div className="flex justify-between">
-            <p className="text-[#626262] font-open-sans text-sm font-normal leading-normal">Special Assistance</p>
-            <p className="text-black font-open-sans text-sm font-semibold leading-normal">{additionalInfo.specialAssistance ? 'Yes' : 'No'}</p>
-          </div>
-          <div className="flex justify-between">
-            <p className="text-[#626262] font-open-sans text-sm font-normal leading-normal">Additional Requests</p>
-            <p className="text-black font-open-sans text-sm font-semibold leading-normal">{additionalInfo.additionalRequests || 'None'}</p>
-          </div>
         </div>
       </div>
 
