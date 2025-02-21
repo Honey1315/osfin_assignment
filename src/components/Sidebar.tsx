@@ -23,13 +23,13 @@ const Sidebar : React.FC = () => {
 
     {options.map((option,i)=>(
         (
-            <div className='flex p-3 px-6 border border-gray-300 gap-3'>
-                <img src={option.path} alt='?'/>
+            <div className='flex p-3 border border-gray-300 gap-3'>
+                <img src={option.path} alt='?' className='w-5'/>
                 <span className='text-black font-open-sans text-base font-semibold leading-normal'>{option.title}</span>
             </div>
         )
     ))}
-    <div className='flex p-3 px-6 border border-gray-300 gap-3'>
+    <div className='flex p-3 border border-gray-300 gap-3'>
             <img src='/assets/svgs/More vert.svg' alt='?'/>
             <span>More</span>
             <img src='/assets/svgs/tabler-icon-chevron-up.svg' alt='?'/>
