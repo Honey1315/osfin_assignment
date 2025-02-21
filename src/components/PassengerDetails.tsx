@@ -54,6 +54,7 @@ const PassengerDetails: React.FC<PassengerDetailsProps> = ({ passengerDetails, s
 
   return (
     <div>
+      <h2>Passenger Details</h2>
       {passengerDetails.map((passenger, index) => (
         <div key={index} className="mb-4 flex justify-between">
           <div>

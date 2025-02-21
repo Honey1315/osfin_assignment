@@ -10,7 +10,7 @@ interface StepControllerProps {
   
   const StepController : React.FC<StepControllerProps> = ({currentStep, lastStep, handleCancel, handleNext, handlePrev}) => {
     return (
-        <div className="flex items-center justify-between border-t border-gray-300 p-4">
+        <div className=" bg-white flex items-center justify-between w-full sticky bottom-0 left-0 right-0 py-4">
         {/* Cancel Link */}
         <div>
           <button onClick={handleCancel} className="text-black underline text-sm font-semibold">

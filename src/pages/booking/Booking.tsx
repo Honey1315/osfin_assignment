@@ -87,15 +87,16 @@ const Booking: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={
-        <section className='px-8 py-4 w-full'>
+        <section className='px-8 pt-4 w-full min-h-svh flex flex-col justify-end gap-10 relative'>
           <h1>Booking Information</h1>
+
           <BookingProgressBar />
 
           {/* Flight Banner */}
           <section id="banner">
         <div className='flex flex-row justify-between h-full'>
           {/* Airplane and clouds */}
-          <div className=' -z-10 w-1/4'>
+          <div className='max-lg:hidden -z-10 w-1/4'>
             <img className='w-full h-full object-cover scale-150' src="/assets/images/banner-airplane.png" alt="Airplane and Clouds of Banner" />
           </div>
 
@@ -103,7 +104,7 @@ const Booking: React.FC = () => {
 
           <section className='flex flex-row justify-between gap-4 h-full pl-8 pr-20 py-6 grow'>
 
-            <div className='flex flex-row gap-6'>
+            <div className='flex flex-row gap-6 grow text-nowrap'>
               <img className='h-1/2' src="/assets/svgs/indigo-logo.svg" alt="Indigo Logo" />
               <div className='space-y-1'>
                 <h3>Indigo Airline</h3>
@@ -119,7 +120,7 @@ const Booking: React.FC = () => {
 
             <div className='border-l w-1 h-full self-stretch border-gray-400 border-dashed' />
 
-            <div className='flex gap-10'>
+            <div className='flex gap-10 grow text-nowrap'>
               <section className='space-y-2'>
                 <h3 className='text-2xl'>12:15</h3>
                 <hr className='border w-full border-gray-300'/>
@@ -150,27 +151,30 @@ const Booking: React.FC = () => {
         </div>
       </section>
 
-          {/* Step Count */}
-          <span className='text-gray-500 font-semibold text-xs uppercase'>{stepProgress}/3 step</span>
-          <section>
-            {stepProgress === 1 && (
-              <PassengerDetails 
-                passengerDetails={passengerDetails}
-                setPassengerDetails={setPassengerDetails}
-              />
-            )}
-            {stepProgress === 2 && (
-              <AdditionalInfo 
-              />
-            )}
-            {stepProgress === 3 && (
-              <Review 
-                flightDetails={flightDetails}
-                passengerDetails={passengerDetails}
-                additionalInfo={additionalInfo}
-              />
-            )}
-          </section>
+          <div className=''>
+
+            {/* Step Count */}
+            <span className='text-gray-500 font-semibold text-xs uppercase'>{stepProgress}/3 step</span>
+            <section>
+              {stepProgress === 1 && (
+                <PassengerDetails 
+                  passengerDetails={passengerDetails}
+                  setPassengerDetails={setPassengerDetails}
+                />
+              )}
+              {stepProgress === 2 && (
+                <AdditionalInfo 
+                />
+              )}
+              {stepProgress === 3 && (
+                <Review 
+                  flightDetails={flightDetails}
+                  passengerDetails={passengerDetails}
+                  additionalInfo={additionalInfo}
+                />
+              )}
+            </section>
+          </div>
           
           <StepController 
             currentStep={stepProgress}
