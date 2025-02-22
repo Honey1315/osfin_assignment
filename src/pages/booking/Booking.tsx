@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PassengerDetails from '../../components/PassengerDetails';
 import AdditionalInfo from '../../components/AdditionalInfo';
 import Review from '../../components/Review';
@@ -27,6 +27,12 @@ interface FlightDetails {
   flightModel: string;
 }
 
+const dummySavedPassengers: PassengerInfo[] = [
+  { fullName: 'John Doe', dateOfBirth: '1990-01-01', gender: 'male' },
+  { fullName: 'Jane Smith', dateOfBirth: '1985-05-15', gender: 'female' },
+  { fullName: 'Alex Johnson', dateOfBirth: '1995-12-31', gender: 'other' },
+];
+
 const Booking: React.FC = () => {
   const [stepProgress, setStepProgress] = useState<number>(1);
   console.log(stepProgress);
@@ -46,7 +52,13 @@ const Booking: React.FC = () => {
   const [isPassengerDetailsValid, setIsPassengerDetailsValid] = useState(false);
   const[email, setEmail]=useState<string>('');
   const[phoneNumber, setPhoneNumber]=useState<string>('');
-
+  const [savedPassengers, setSavedPassengers] = useState<PassengerInfo[]>([]);
+  useEffect(() => {
+    const userEmail = sessionStorage.getItem('userEmail');
+    if (userEmail) {
+      setSavedPassengers(dummySavedPassengers);
+    }
+  }, []);
   const navigate = useNavigate();
 
   const submit=()=>{
@@ -60,7 +72,12 @@ const Booking: React.FC = () => {
     if (stepProgress < 3) {
       setStepProgress(curr => curr + 1);
     } else {
-      navigate('review');
+      if (sessionStorage.getItem('userEmail') !== null)  {
+        navigate('review');
+      } else {
+        localStorage.setItem('redirectAfterLogin', '/review');
+        navigate('/login');
+      }
     }
   };
 
@@ -69,14 +86,14 @@ const Booking: React.FC = () => {
     if (stepProgress > 1) {
       setStepProgress(curr => curr - 1);
     } else {
-      navigate('/');  // Navigate to home or previous page
+      navigate('/');
     }
   };
 
   const cancel = () => {
     setStepProgress(1);
     setPassengerDetails([]);
-    navigate('/login');  // Navigate to login page
+    navigate('/login');
   };
 
   return (
@@ -163,6 +180,7 @@ const Booking: React.FC = () => {
                   setPhoneNumber={setPhoneNumber}
                   setIsValid={setIsPassengerDetailsValid}
                   flightDetails={flightDetails}
+                  savedPassengers={savedPassengers}
                 />
               )}
               {stepProgress === 2 && (
