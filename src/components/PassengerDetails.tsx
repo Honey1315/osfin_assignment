@@ -149,11 +149,7 @@ const PassengerDetails: React.FC<PassengerDetailsProps> = ({
                 onFocus={() => handleFocus('fullName')}
                 onBlur={handleBlur}
                 placeholder="Full Name"
-                className={`border p-2 ${
-                  errors[`fullName-${index + 1}`] && activeField === 'fullName'
-                    ? 'border-red-500'
-                    : 'border-gray-300'
-                } w-full rounded-md bg-[#F6F6F6]`}
+                className={` p-3 ${errors[`fullName-${index+1}`] && activeField === 'fullName' ? '-red-500' : '-gray-300'} w-full rounded-md bg-[#F6F6F6]`}
               />
               {errors[`fullName-${index + 1}`] &&
                 activeField === 'fullName' && (
@@ -178,12 +174,7 @@ const PassengerDetails: React.FC<PassengerDetailsProps> = ({
                 }
                 onFocus={() => handleFocus('dateOfBirth')}
                 onBlur={handleBlur}
-                className={`border p-2 ${
-                  errors[`dateOfBirth-${index + 1}`] &&
-                  activeField === 'dateOfBirth'
-                    ? 'border-red-500'
-                    : 'border-gray-300'
-                } w-full rounded-md bg-[#F6F6F6]`}
+                className={` p-3 ${errors[`dateOfBirth-${index+1}`] && activeField === 'dateOfBirth' ? '-red-500' : '-gray-300'} w-full rounded-md bg-[#F6F6F6]`}
               />
               {errors[`dateOfBirth-${index + 1}`] &&
                 activeField === 'dateOfBirth' && (
@@ -243,57 +234,39 @@ const PassengerDetails: React.FC<PassengerDetailsProps> = ({
         <span>Add a Passenger</span>
       </button>
 
-      <div className="flex gap-8 justify-start !mt-4">
-        <div className="w-full max-w-[30svw]">
-          <label
-            htmlFor={`Contact_Number`}
-            className="text-black font-open-sans text-sm font-semibold leading-normal"
-          >
-            Phone Number
-          </label>
-          <div className="flex gap-2">
-            <div className="flex border p-2 rounded-md bg-[#F6F6F6]">
-              <img src="./assets/svgs/India (IN).svg" alt="?" className="w-6" />
-              <img
-                src="./assets/svgs/tabler-icon-chevron-up (1).svg"
-                alt="?"
-                className="w-6"
-              />
-            </div>
-            <input
-              id={`Contact_Number`}
-              type="tel"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              onBlur={handleBlur}
-              placeholder="(+91) 999-9999"
-              className={`border p-2 h-10 rounded-md bg-[#F6F6F6]`}
-            />
-          </div>
-          {errors['phoneNumber'] && (
-            <p className="text-red-500 text-sm">{errors['phoneNumber']}</p>
-          )}
+      <div className='flex gap-8 justify-start !mt-4'>
+
+
+        <div className='w-full max-w-[30svw]'>
+              <label htmlFor={`Contact_Number`} className="text-black font-open-sans text-sm font-semibold leading-normal">Phone Number</label>
+                <div className='flex gap-3'>
+                  <div className='flex  p-3 rounded-md bg-[#F6F6F6]'>
+                    <img src='./assets/svgs/India (IN).svg' alt='?' className='w-6'/>
+                    <img src='./assets/svgs/tabler-icon-chevron-up (1).svg' alt='?' className='w-6'/>
+                  </div>
+                  <input
+                  id={`Contact_Number`}
+                  type="phone"
+                  value={phoneNumber}
+                  onChange={(e)=> setPhoneNumber((prev)=> e.target.value)}
+                  onBlur={handleBlur}
+                  placeholder="(+91) 999-9999"
+                  className={` pl-2 rounded-md bg-[#F6F6F6]`}
+                />
+                </div>
         </div>
 
-        <div className="w-full max-w-[30svw]">
-          <label
-            htmlFor={`Contact_Email`}
-            className="text-black font-open-sans text-sm font-semibold leading-normal"
-          >
-            Email Address
-          </label>
-          <input
-            id={`Contact_Email`}
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onBlur={handleBlur}
-            placeholder="Enter your email"
-            className={`border p-2 h-10 rounded-md bg-[#F6F6F6]`}
-          />
-          {errors['email'] && (
-            <p className="text-red-500 text-sm">{errors['email']}</p>
-          )}
+        <div className='w-full max-w-[30svw]'>
+            <label htmlFor={`Contact_Email`} className="text-black font-open-sans text-sm font-semibold leading-normal">Email Address</label>
+              <input
+              id={`Contact_Email`}
+              type="email"
+              value={email}
+              onChange={(e)=> setEmail((prev)=> e.target.value)}
+              onBlur={handleBlur}
+              placeholder="Enter your email"
+              className={` p-3 rounded-md bg-[#F6F6F6]`}
+            />
         </div>
       </div>
     </div>
