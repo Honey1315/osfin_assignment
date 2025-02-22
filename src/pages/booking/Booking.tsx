@@ -54,7 +54,7 @@ const Booking: React.FC = () => {
   const[phoneNumber, setPhoneNumber]=useState<string>('');
   const [savedPassengers, setSavedPassengers] = useState<PassengerInfo[]>([]);
   useEffect(() => {
-    const userEmail = sessionStorage.getItem('userEmail');
+    const userEmail = sessionStorage.getItem('userEmail') || localStorage.getItem('userEmail');
     if (userEmail) {
       setSavedPassengers(dummySavedPassengers);
     }
