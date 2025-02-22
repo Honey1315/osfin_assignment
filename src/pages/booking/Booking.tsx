@@ -75,35 +75,42 @@ const Booking: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={
-        <section className='px-8 py-4 w-full'>
+        <section className='px-8 pt-4 w-full min-h-svh flex flex-col justify-end gap-10 relative'>
           <h1>Booking Information</h1>
+
           <BookingProgressBar stepProgress={stepProgress}/>
-          <span className='text-gray-500 font-semibold text-xs uppercase'>{stepProgress}/3 step</span>
-          
-          <section>
-            {stepProgress === 1 && (
-              <PassengerDetails 
-                passengerDetails={passengerDetails}
-                setPassengerDetails={setPassengerDetails}
-                setIsValid={setIsPassengerDetailsValid}
-                flightDetails={flightDetails}
-                email={email}
-                setEmail={setEmail}
-                phoneNumber={phoneNumber}
-                setPhoneNumber={setPhoneNumber}
-              />
-            )}
-            {stepProgress === 2 && (
-              <AdditionalInfo 
-              />
-            )}
-            {stepProgress === 3 && (
-              <Review 
-                flightDetails={flightDetails}
-                passengerDetails={passengerDetails}
-              />
-            )}
-          </section>
+
+          {/* Flight Banner */}
+      
+          <div className=''>
+
+            {/* Step Count */}
+            <span className='text-gray-500 font-semibold text-xs uppercase'>{stepProgress}/3 step</span>
+            <section>
+              {stepProgress === 1 && (
+                <PassengerDetails 
+                  passengerDetails={passengerDetails}
+                  setPassengerDetails={setPassengerDetails}
+                  email={email}
+                  setEmail={setEmail}
+                  phoneNumber={phoneNumber}
+                  setPhoneNumber={setPhoneNumber}
+                  setIsValid={setIsPassengerDetailsValid}
+                  flightDetails={flightDetails}
+                />
+              )}
+              {stepProgress === 2 && (
+                <AdditionalInfo 
+                />
+              )}
+              {stepProgress === 3 && (
+                <Review 
+                  flightDetails={flightDetails}
+                  passengerDetails={passengerDetails}
+                />
+              )}
+            </section>
+          </div>
           
           <StepController 
             currentStep={stepProgress}

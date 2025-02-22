@@ -146,6 +146,7 @@ const PassengerDetails: React.FC<PassengerDetailsProps> = ({ passengerDetails, s
         </div>
       </section>
 
+      <h2>Passenger Details</h2>
       {passengerDetails.map((passenger, index) => (
         <div>
         <div key={index} className="py-2 flex justify-between w-full gap-14">
