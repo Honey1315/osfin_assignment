@@ -23,9 +23,11 @@ interface FlightDetails {
 interface ReviewProps {
   flightDetails: FlightDetails;
   passengerDetails: PassengerInfo[];
+  email : string,
+  phoneNumber : string
 }
 
-const Review: React.FC<ReviewProps> = ({ flightDetails, passengerDetails }) => {
+const Review: React.FC<ReviewProps> = ({ flightDetails, passengerDetails, email, phoneNumber }) => {
   return (
     <div className='flex flex-col gap-6 w-full'>
       <div>
@@ -72,6 +74,12 @@ const Review: React.FC<ReviewProps> = ({ flightDetails, passengerDetails }) => {
               <p className="text-black font-open-sans text-sm font-semibold leading-normal capitalize">{passenger.gender}</p>
             </div>
           ))}
+          <div className="flex w-2/4 justify-between">
+              <p className="text-[#626262] font-open-sans text-sm font-normal leading-normal">Phone Number</p>
+              <p className="text-black font-open-sans text-sm font-semibold leading-normal">{phoneNumber}</p>
+              <p className="text-[#626262] font-open-sans text-sm font-normal leading-normal">Email</p>
+              <p className="text-black font-open-sans text-sm font-semibold leading-normal">{email}</p>
+            </div>
         </div>
       </div>
 

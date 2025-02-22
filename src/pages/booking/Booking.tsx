@@ -73,8 +73,7 @@ const Booking: React.FC = () => {
   };
 
   return (
-    <Routes>
-      <Route path="/" element={
+    <div className='w-full'>
         <section className='px-8 pt-4 w-full min-h-svh flex flex-col justify-end gap-10 relative'>
           <h1>Booking Information</h1>
 
@@ -167,6 +166,8 @@ const Booking: React.FC = () => {
                 <Review 
                   flightDetails={flightDetails}
                   passengerDetails={passengerDetails}
+                  email={email}
+                  phoneNumber={phoneNumber}
                 />
               )}
             </section>
@@ -181,14 +182,7 @@ const Booking: React.FC = () => {
             isNextDisabled={stepProgress === 1 && !isPassengerDetailsValid}
           />
         </section>
-      } />
-      <Route path="/review" element={
-        <Review 
-          flightDetails={flightDetails}
-          passengerDetails={passengerDetails}
-        />
-      } />
-    </Routes>
+      </div>
   );
 };
 
