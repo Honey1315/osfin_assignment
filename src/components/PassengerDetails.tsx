@@ -128,37 +128,83 @@ const PassengerDetails: React.FC<PassengerDetailsProps> = ({
         validateAllFields();
     }, [passengerDetails, phoneNumber, email]);
 
-    const toggleSavedPassenger = (passenger: PassengerInfo) => {
-        const isSelected = selectedSavedPassengers.some(p => p.fullName === passenger.fullName && p.dateOfBirth === passenger.dateOfBirth && p.gender === passenger.gender);
+    // const toggleSavedPassenger = (passenger: PassengerInfo) => {
+    //     const isSelected = selectedSavedPassengers.some(p => p.fullName === passenger.fullName && p.dateOfBirth === passenger.dateOfBirth && p.gender === passenger.gender);
 
+    //     if (isSelected) {
+    //         setSelectedSavedPassengers(prev => prev.filter(p => p.fullName !== passenger.fullName || p.dateOfBirth !== passenger.dateOfBirth || p.gender !== passenger.gender));
+    //         setPassengerDetails(prev => prev.filter(p => p.fullName !== passenger.fullName || p.dateOfBirth !== passenger.dateOfBirth || p.gender !== passenger.gender));
+    //     } else {
+    //         setSelectedSavedPassengers(prev => [...prev, passenger]);
+    //         setPassengerDetails(prev => [...prev, passenger]);
+    //     }
+    // };
+
+
+    const toggleSavedPassenger = (passenger: PassengerInfo) => {
+        const isSelected = selectedSavedPassengers.some(p => 
+            p.fullName === passenger.fullName && 
+            p.dateOfBirth === passenger.dateOfBirth && 
+            p.gender === passenger.gender
+        );
+    
         if (isSelected) {
-            setSelectedSavedPassengers(prev => prev.filter(p => p.fullName !== passenger.fullName || p.dateOfBirth !== passenger.dateOfBirth || p.gender !== passenger.gender));
-            setPassengerDetails(prev => prev.filter(p => p.fullName !== passenger.fullName || p.dateOfBirth !== passenger.dateOfBirth || p.gender !== passenger.gender));
+            setSelectedSavedPassengers(prev => prev.filter(p => 
+                p.fullName !== passenger.fullName || 
+                p.dateOfBirth !== passenger.dateOfBirth || 
+                p.gender !== passenger.gender
+            ));
+            setPassengerDetails(prev => prev.filter(p => 
+                p.fullName !== passenger.fullName || 
+                p.dateOfBirth !== passenger.dateOfBirth || 
+                p.gender !== passenger.gender
+            ));
         } else {
             setSelectedSavedPassengers(prev => [...prev, passenger]);
-            setPassengerDetails(prev => [...prev, passenger]);
+    
+            setPassengerDetails(prev => {
+                if (prev.length === 1 && prev[0].fullName === '' && prev[0].dateOfBirth === '' && prev[0].gender === '') {
+                    // Replace the empty entry with actual passenger details
+                    return [passenger];
+                } else {
+                    // Append to the list
+                    return [...prev, passenger];
+                }
+            });
         }
     };
-
+    
     return (
         <div className="space-y-4">
             <h2 className="!mb-5">Passenger Details</h2>
 
             {savedPassengers.length > 0 && (
-                <div className="mb-4">
+                <div className="mb-4 space-y-2 bg-white rounded-lg  drop-shadow p-4">
                     <h3 className="text-lg font-medium">Saved Passengers</h3>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-[3.75rem]">
                         {savedPassengers.map((passenger, index) => {
                             const isSelected = selectedSavedPassengers.some(p => p.fullName === passenger.fullName && p.dateOfBirth === passenger.dateOfBirth && p.gender === passenger.gender);
                             return (
-                                <button
-                                    key={index}
-                                    onClick={() => toggleSavedPassenger(passenger)}
-                                    className={`px-3 py-1 rounded ${isSelected ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'
-                                        }`}
-                                >
-                                    {passenger.fullName}
-                                </button>
+                                <>
+                                    <label key={index} className="flex items-center space-x-3 cursor-pointer font-normal font-sm">
+                                        <input
+                                        type="checkbox"
+                                        name="selectedPassenger"
+                                        value={passenger.fullName}
+                                        checked={isSelected}
+                                        onChange={() => toggleSavedPassenger(passenger)}
+                                        className=""
+                                        />
+                                        <div
+                                        className=""
+                                        >
+                                        {passenger.fullName}
+                                        </div>
+                                    </label>
+                                    
+
+
+                                </>
                             );
                         })}
                     </div>
