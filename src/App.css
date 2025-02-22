@@ -29,3 +29,15 @@ label{
 
   @apply w-full h-32 ;
 }
+
+div:has(> label):has(> input), div:has(> label):has(> div){
+  @apply flex flex-col gap-2;
+}
+
+::-moz-placeholder, ::-webkit-input-placeholder, ::placeholder{
+  @apply text-sm;
+}
+
+input{
+  @apply text-sm grow max-w-[30svw];
+}

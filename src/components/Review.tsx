@@ -27,7 +27,7 @@ interface ReviewProps {
 
 const Review: React.FC<ReviewProps> = ({ flightDetails, passengerDetails }) => {
   return (
-    <div className='flex flex-col gap-6 p-8 w-full'>
+    <div className='flex flex-col gap-6 w-full'>
       <div>
         <h1 className='flex text-black font-open-sans text-xl font-bold leading-normal tracking-[0px] py-5'>Review and Submit</h1>
         <div className="flex items-center mb-2 gap-4">
@@ -69,7 +69,7 @@ const Review: React.FC<ReviewProps> = ({ flightDetails, passengerDetails }) => {
               <p className="text-[#626262] font-open-sans text-sm font-normal leading-normal">Date of Birth</p>
               <p className="text-black font-open-sans text-sm font-semibold leading-normal">{passenger.dateOfBirth}</p>
               <p className="text-[#626262] font-open-sans text-sm font-normal leading-normal">Gender</p>
-              <p className="text-black font-open-sans text-sm font-semibold leading-normal">{passenger.gender}</p>
+              <p className="text-black font-open-sans text-sm font-semibold leading-normal capitalize">{passenger.gender}</p>
             </div>
           ))}
         </div>

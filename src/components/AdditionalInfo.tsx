@@ -2,11 +2,10 @@ import { useState } from "react";
 
 const AdditionalInfo = () => {
   return (
-    <div className="">
-      <h2>Passenger Details</h2>
+    <div className="space-y-4">
+      <h2 className="!mb-5">Additional Information</h2>
 
-
-      <div className=''>
+      
         <h3 className='font-semibold'>Baggage Options</h3>
         <div className="bg-[#F6F6F6] rounded-lg p-5 space-y-1">
           <div className='flex gap-2 pb-2'>
@@ -36,7 +35,6 @@ const AdditionalInfo = () => {
             </div>
           </div>
         </div>
-      </div>
 
 
       {/* Header Section */}
@@ -90,7 +88,7 @@ const TripSecurityToggle = () => {
 
   return (
     <div >
-      <label className="flex items-center p-2 rounded-lg cursor-pointer transition-colors">
+      <label className="flex justify-start w-fit items-center p-2 gap-3 rounded-lg cursor-pointer transition-colors">
         <input
           type="radio"
           name="tripSecurity"
@@ -98,11 +96,11 @@ const TripSecurityToggle = () => {
           onChange={() => setSelectedOption('secure')}
           className="h-4 w-4 text-purple-600 rounded-full border-gray-300 focus:ring-purple-500"
         />
-        <span className="ml-6 font-medium text-400">
+        <span className="font-medium">
           <strong className="font-semibold">Yes</strong>, Secure my trip.
         </span>
       </label>
-      <label className="flex items-center p-2 rounded-lg cursor-pointer transition-colors">
+      <label className="flex justify-start w-fit items-center p-2 gap-3 rounded-lg cursor-pointer transition-colors">
         <input
           type="radio"
           name="tripSecurity"
@@ -110,7 +108,7 @@ const TripSecurityToggle = () => {
           onChange={() => setSelectedOption('without')}
           className="h-4 w-4 text-purple-600 rounded-full border-gray-300 focus:ring-purple-500"
         />
-        <span className="ml-6 font-medium text-400">
+        <span className="font-medium ">
           <strong className="font-semibold">No</strong>, I will book without trip secure.
         </span>      
       </label>
