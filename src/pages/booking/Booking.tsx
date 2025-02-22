@@ -5,6 +5,7 @@ import AdditionalInfo from '../../components/AdditionalInfo';
 import Review from '../../components/Review';
 import BookingProgressBar from '../../components/BookingProgressBar';
 import StepController from '../../StepController';
+import Confirmation from '../confirmation/Confirmation';
 
 interface PassengerInfo {
   fullName: string;
@@ -47,6 +48,12 @@ const Booking: React.FC = () => {
   const[phoneNumber, setPhoneNumber]=useState<string>('');
 
   const navigate = useNavigate();
+
+  const submit=()=>{
+    navigate("/success", {
+      state: { flightDetails, passengerDetails, email, phoneNumber }
+    })
+  }
 
   const next = () => {
     console.log(stepProgress);
@@ -147,7 +154,7 @@ const Booking: React.FC = () => {
             <span className='text-gray-500 font-semibold text-xs uppercase'>{stepProgress}/3 step</span>
             <section>
               {stepProgress === 1 && (
-                <PassengerDetails 
+                  <PassengerDetails 
                   passengerDetails={passengerDetails}
                   setPassengerDetails={setPassengerDetails}
                   email={email}
@@ -179,8 +186,10 @@ const Booking: React.FC = () => {
             handleCancel={cancel}
             handleNext={next}
             handlePrev={prev}
+            handleSubmit={submit}
             isNextDisabled={stepProgress === 1 && !isPassengerDetailsValid}
           />
+
         </section>
       </div>
   );

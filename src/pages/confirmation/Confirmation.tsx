@@ -1,9 +1,33 @@
 import React from 'react'
+import { ReviewProps, PassengerInfo, FlightDetails } from '../../components/Review';
+import { useLocation } from 'react-router-dom';
 
-const Confirmation  : React.FC= () => {
+
+const Confirmation: React.FC = ()=> {
+
+  const location=useLocation();
+  const { flightDetails, passengerDetails, email, phoneNumber } = location.state as ReviewProps || {};
+  function getAge(dateOfBirth: string): number {
+    const dob = new Date(dateOfBirth);
+    if (isNaN(dob.getTime())) return 0; // Handle invalid date
+    const today = new Date();
+    
+    let age = today.getFullYear() - dob.getFullYear();
+    const monthDiff = today.getMonth() - dob.getMonth();
+    const dayDiff = today.getDate() - dob.getDate();
+  
+    // Adjust age if birthday hasn't occurred yet this year
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+      age--;
+    }
+  
+    return age;
+  }
+  
+
   return (
-    <div className='w-full flex flex-col items-center'>
-      <div className="w-4/5 p-6 text-center mt-[4rem] bg-white rounded-lg">
+    <div className="lg:w-3/5 w-5/6 md:3/4 mx-auto flex flex-col items-center mt-10 space-y-6">
+      <div className="w-full text-center bg-white rounded-lg">
         <div>
           {/* Success Icon */}
           <div className="mx-auto mb-4 w-1/12 h-1/12 flex items-center justify-center">
@@ -26,9 +50,9 @@ const Confirmation  : React.FC= () => {
           </p>
         </div>
       </div>
-      <div className="w-4/5 m-6 p-6 bg-white rounded-lg shadow-sm border border-gray-200 text-[#202020]">
+      <div className="w-full space-y-6 p-6 bg-white rounded-lg shadow-sm border border-gray-200 text-[#202020]">
         {/* Header Section */}
-        <div className="flex justify-between mb-6 text-sm text-gray-600">
+        <div className="flex justify-between text-sm text-gray-600">
           <div className="flex flex-row gap-1">
             <p>PNR No:</p>
             <p>1234567890</p>
@@ -41,61 +65,73 @@ const Confirmation  : React.FC= () => {
 
         {/* Flight Details */}
         <div className="mb-6">
-          <div className="flex items-center gap-2 mb-3">
-            <h3 className="font-bold text-900">Airbus A350-900</h3>
-          </div>
+          
+          <h3 className="font-bold text-900 mb-2 text-base">{flightDetails.flightModel}</h3>
+          
+          <div className='flex w-full justify-between items-center gap-10'>
+            <section className='flex text-sm flex-col gap-0'>
+              <strong className='mb-2 font-semibold'>Nov 16</strong>
+              <span>
+                {flightDetails.arrivalTime}
+              </span>
+              <span>
+                {flightDetails.boardingCity}
+              </span>
+            </section>
 
-          <div className="flex flex-row justify-between text-700 my-4">
-            <p>Nov 16</p>
-            <p>Nov 17</p>
-          </div>
 
-          <div className="flex whitespace-nowrap flex-row flex-nowrap content-center justify-between text-700 my-6">
-            <div className="mr-4">
-              <p>12:15</p>
-              <p>New Delhi</p>
+            <div className='flex flex-col gap-2 items-center grow'>
+
+              <span className='text-xs text-gray-300'>2 hours 20 minutes</span>
+              <hr id="confirm_flight_line" className='relative border-gray-200 border-1 w-full' />
+
             </div>
-            <div className="flex flex-col items-center w-full">
-              <div className="text-gray-500 text-xs">2 hours 20 minutes</div>
-              <div className="flex flex-row items-center w-full">
-                <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-                <hr className="flex-grow border-gray-300" />
-                <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+
+            <section className='flex text-sm flex-col gap-0'>
+              <strong className='mb-2 font-semibold'>Nov 17</strong>
+              <span>
+                {flightDetails.departureTime}
+              </span>
+              <span>
+                {flightDetails.destinationCity}
+              </span>
+              
+            </section>
+
+          </div>
+          
+        </div>
+
+        <div className="text-sm flex flex-row justify-between align-center items-center text-700 my-6 ">
+          <div className=" text-gray-700">E-Tickets has been sent to:</div>
+          <div className='text-[#404040]'>
+            <p>{passengerDetails[0].fullName}</p>
+            <p>{email}</p>
+          </div>
+        </div>
+
+        <ol>
+          <h3>Traveller Details</h3>
+          {passengerDetails.map((passenger) => (
+            <div className='py-2'>
+              <h4 className='text-sm'>{passenger.fullName}</h4>
+
+              <div className="flex whitespace-nowrap flex-row flex-nowrap content-center justify-between my-2 text-gray-500 text-sm">
+                <div className="text-left">
+                  <p>Age: {getAge(passenger.dateOfBirth)} Yrs</p>
+                  <p>Gender: {passenger.gender}</p>
+                </div>
+                <div className="text-right">
+                  <p>Booking Status : Confirmed</p>
+                  <p>Seat no. : 22A</p>
+                </div>
               </div>
             </div>
-            <div className="ml-4">
-              <p>6:00</p>
-              <p>Mumbai</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-row justify-between align-center items-center text-700 my-6 ">
-          <div className="text-gray-600">E-Tickets has been sent to:</div>
-          <div>
-            <p>Anshul Choudhry</p>
-            <p>anshul***@*****.com</p>
-          </div>
-        </div>
-
-        <div className="pt-6 my-6">
-          <h3 className="">Traveller Details</h3>
-          <h4>Anshul Chaudhary</h4>
-
-          <div className="flex whitespace-nowrap flex-row flex-nowrap content-center justify-between mt-4 text-700">
-            <div className="text-left">
-              <p>Age: 24 Yrs</p>
-              <p>Gender: Male</p>
-            </div>
-            <div className="text-right">
-              <p>Booking Status : Confirmed</p>
-              <p>Seat no. : 22A</p>
-            </div>
-          </div>
-        </div>
+          ))}
+        </ol>
 
         <div>
-          <div className="flex whitespace-nowrap flex-row content-center justify-between">
+          <div className="flex whitespace-nowrap content-center justify-between">
             <b>Total Fare</b>
             <b>$300</b>
           </div>

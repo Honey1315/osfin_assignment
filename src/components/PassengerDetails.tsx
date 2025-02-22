@@ -219,7 +219,7 @@ const PassengerDetails: React.FC<PassengerDetailsProps> = ({
           {index > 0 && (
             <button
               onClick={() => removePassenger(index)}
-              className="text-red-600 font-inter text-sm font-semibold pb-2 underline"
+              className="text-red-600  text-sm font-semibold pb-2 underline"
             >
               Remove
             </button>
@@ -228,7 +228,7 @@ const PassengerDetails: React.FC<PassengerDetailsProps> = ({
       ))}
       <button
         onClick={addPassenger}
-        className="flex gap-1 items-center text-[#6B6B6B] font-inter text-sm font-semibold leading-5 tracking-[0px]"
+        className="flex gap-1 items-center text-[#6B6B6B]  text-sm font-semibold leading-5 tracking-[0px]"
       >
         <img src="/assets/svgs/tabler-icon-plus.svg" alt="Add a Passenger Icon" />
         <span>Add a Passenger</span>

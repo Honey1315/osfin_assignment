@@ -6,6 +6,7 @@ interface StepControllerProps {
   handleNext: () => void;
   handlePrev: () => void;
   handleCancel: () => void;
+  handleSubmit: () => void;
   isNextDisabled: boolean;
 }
 
@@ -15,6 +16,7 @@ const StepController: React.FC<StepControllerProps> = ({
   handleCancel,
   handleNext,
   handlePrev,
+  handleSubmit,
   isNextDisabled
 }) => {
   return (
@@ -39,7 +41,7 @@ const StepController: React.FC<StepControllerProps> = ({
 
         {currentStep === lastStep ? (
           <button
-            onClick={handleNext}
+            onClick={handleSubmit}
             className={`inline-flex h-10 min-w-[68px] px-6 py-2.5 justify-center items-center gap-2.5 flex-shrink-0 rounded-lg ${
               isNextDisabled ? 'bg-gray-300 cursor-not-allowed' : 'bg-[#2D2D2D] text-white'
             }`}

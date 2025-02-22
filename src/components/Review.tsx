@@ -1,13 +1,13 @@
 import React from 'react';
 
-interface PassengerInfo {
+export interface PassengerInfo {
   fullName: string;
   dateOfBirth: string;
   gender: string;
 }
 
 
-interface FlightDetails {
+export interface FlightDetails {
   boardingStation: string;
   destinationStation: string;
   duration: string;
@@ -20,7 +20,7 @@ interface FlightDetails {
   flightModel: string;
 }
 
-interface ReviewProps {
+export interface ReviewProps {
   flightDetails: FlightDetails;
   passengerDetails: PassengerInfo[];
   email : string,

@@ -41,3 +41,14 @@ div:has(> label):has(> input), div:has(> label):has(> div){
 input{
   @apply text-sm grow max-w-[30svw];
 }
+
+
+#confirm_flight_line::after{
+  content: '';
+  @apply rounded-full bg-gray-200 w-2 h-2 block absolute right-0 top-0 -translate-y-1/2;
+}
+
+#confirm_flight_line::before{
+  content: '';
+  @apply rounded-full bg-gray-200 w-2 h-2 block absolute left-0 top-0 -translate-y-1/2;
+}
