@@ -1,43 +1,45 @@
-import { useState } from "react";
+import React from "react";
 
-const AdditionalInfo = () => {
+interface AdditionalInfoProps {
+    secure: boolean;
+    setSecure: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const AdditionalInfo: React.FC<AdditionalInfoProps> = ({ secure, setSecure }) => {
   return (
     <div className="space-y-4">
       <h2 className="!mb-5">Additional Information</h2>
 
-      
-        <h3 className='font-semibold'>Baggage Options</h3>
-        <div className="bg-[#F6F6F6] rounded-lg p-5 space-y-1">
-          <div className='flex gap-2 pb-2'>
-            <img src='/assets/svgs/tabler-icon-circle-check-filled.svg' alt='c'/>
-            <p className="font-semibold text-sm">Included</p>
-            <p className="font-normal text-sm">Baggage per person</p>
+      <h3 className='font-semibold'>Baggage Options</h3>
+      <div className="bg-[#F6F6F6] rounded-lg p-5 space-y-1">
+        <div className='flex gap-2 pb-2'>
+          <img src='/assets/svgs/tabler-icon-circle-check-filled.svg' alt='c'/>
+          <p className="font-semibold text-sm">Included</p>
+          <p className="font-normal text-sm">Baggage per person</p>
+        </div>
+        <div className='flex gap-10'>
+          <div className='flex gap-2 items-center !text-xs '>
+            <img src='/assets/svgs/tabler-icon-briefcase.svg' alt='c'/>
+            <p className='font-semibold'>Cabin Baggage</p>
+            <p className='text-gray-500'>7 kgs (1 piece only) / Adult</p>
           </div>
-          <div className='flex gap-10'>
-            <div className='flex gap-2 items-center !text-xs '>
-              <img src='/assets/svgs/tabler-icon-briefcase.svg' alt='c'/>
-              <p className='font-semibold'>Cabin Baggage</p>
-              <p className='text-gray-500'>7 kgs (1 piece only) / Adult</p>
-            </div>
-            <div className='flex gap-2 items-center !text-xs '>
-              <img src='/assets/svgs/tabler-icon-luggage.svg' alt='c'/>
-              <p className='font-semibold'>Check-In Baggage</p>
-              <p className='text-gray-500'>15 Kgs (1 piece only) / Adult</p>
-            </div>
-          </div>
-          <div className="p-3 bg-[#ECEFFF] rounded-lg flex items-start gap-1 !mt-3">
-            <img src="/assets/svgs/tabler-icon-info-circle-filled.svg" alt="Baggage Options Info Icon" />
-            <div className="space-y-1">
-              <h4 className="text-xs font-semibold">
-              One- way Trip Combination
-              </h4>
-              <p className="text-xs">This trip combines 2 independent one-way with separate terms for changes. For more information, see our Terms and Conditions here.</p>
-            </div>
+          <div className='flex gap-2 items-center !text-xs '>
+            <img src='/assets/svgs/tabler-icon-luggage.svg' alt='c'/>
+            <p className='font-semibold'>Check-In Baggage</p>
+            <p className='text-gray-500'>15 Kgs (1 piece only) / Adult</p>
           </div>
         </div>
+        <div className="p-3 bg-[#ECEFFF] rounded-lg flex items-start gap-1 !mt-3">
+          <img src="/assets/svgs/tabler-icon-info-circle-filled.svg" alt="Baggage Options Info Icon" />
+          <div className="space-y-1">
+            <h4 className="text-xs font-semibold">
+            One- way Trip Combination
+            </h4>
+            <p className="text-xs">This trip combines 2 independent one-way with separate terms for changes. For more information, see our Terms and Conditions here.</p>
+          </div>
+        </div>
+      </div>
 
-
-      {/* Header Section */}
       <h3 className="font-semibold">
         Make your Trip Secure
       </h3>      
@@ -50,7 +52,6 @@ const AdditionalInfo = () => {
           </div>
         </div>
 
-        {/* Features List */}
         <ul className="grid grid-cols-4 gap-6">
           <InsuranceFeature
             icon="/assets/svgs/tabler-icon-luggage.svg"
@@ -76,24 +77,32 @@ const AdditionalInfo = () => {
             titleStarting="Flat"
             titleEnding="$ 2,500"
             description="Delay of Checked in Baggage"
-          />        </ul>      
+          />
+        </ul>      
       </div>   
-      <TripSecurityToggle/> 
+      <TripSecurityToggle secure={secure} setSecure={setSecure} />
     </div>
   );
 };
 
-const TripSecurityToggle = () => {
-  const [selectedOption, setSelectedOption] = useState<'secure' | 'without'>('secure');
+interface TripSecurityToggleProps {
+  secure: boolean;
+  setSecure: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const TripSecurityToggle: React.FC<TripSecurityToggleProps> = ({ secure, setSecure }) => {
+  const handleOptionChange = (option: 'secure' | 'without') => {
+    setSecure(option === 'secure');
+  };
 
   return (
-    <div >
+    <div>
       <label className="flex justify-start w-fit items-center p-2 gap-3 rounded-lg cursor-pointer transition-colors">
         <input
           type="radio"
           name="tripSecurity"
-          checked={selectedOption === 'secure'}
-          onChange={() => setSelectedOption('secure')}
+          checked={secure}
+          onChange={() => handleOptionChange('secure')}
           className="h-4 w-4 text-purple-600 rounded-full border-gray-300 focus:ring-purple-500"
         />
         <span className="font-medium">
@@ -104,8 +113,8 @@ const TripSecurityToggle = () => {
         <input
           type="radio"
           name="tripSecurity"
-          checked={selectedOption === 'without'}
-          onChange={() => setSelectedOption('without')}
+          checked={!secure}
+          onChange={() => handleOptionChange('without')}
           className="h-4 w-4 text-purple-600 rounded-full border-gray-300 focus:ring-purple-500"
         />
         <span className="font-medium ">
@@ -116,15 +125,13 @@ const TripSecurityToggle = () => {
   );
 };
 
-
-// Reusable Insurance Feature Component
-const InsuranceFeature = ({ icon, titleStarting,titleEnding, description ,reverseTitle }: { 
+const InsuranceFeature: React.FC<{
   icon: string;
   titleStarting: string;
   titleEnding: string;
   description: string;
   reverseTitle?: boolean;
-}) => (
+}> = ({ icon, titleStarting, titleEnding, description, reverseTitle }) => (
   <li className="flex justify-start gap-3 bg-white rounded-lg p-4 h-fit">
     <div className="flex-shrink-0 ">
       <img src={icon} alt={titleStarting} />
@@ -137,6 +144,5 @@ const InsuranceFeature = ({ icon, titleStarting,titleEnding, description ,revers
     </div>
   </li>
 );
-
 
 export default AdditionalInfo;

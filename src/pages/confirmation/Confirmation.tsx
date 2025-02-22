@@ -112,7 +112,7 @@ const Confirmation: React.FC = ()=> {
 
         <ol>
           <h3>Traveller Details</h3>
-          {passengerDetails.map((passenger) => (
+          {passengerDetails.map((passenger,i) => (
             <div className='py-2'>
               <h4 className='text-sm'>{passenger.fullName}</h4>
 
@@ -123,7 +123,7 @@ const Confirmation: React.FC = ()=> {
                 </div>
                 <div className="text-right">
                   <p>Booking Status : Confirmed</p>
-                  <p>Seat no. : 22A</p>
+                  <p>Seat no. : {i+1}A</p>
                 </div>
               </div>
             </div>
@@ -133,7 +133,8 @@ const Confirmation: React.FC = ()=> {
         <div>
           <div className="flex whitespace-nowrap content-center justify-between">
             <b>Total Fare</b>
-            <b>$300</b>
+            
+            <b>{passengerDetails.length * 300}</b>
           </div>
         </div>
       </div>

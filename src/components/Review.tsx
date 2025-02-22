@@ -25,9 +25,11 @@ export interface ReviewProps {
   passengerDetails: PassengerInfo[];
   email : string,
   phoneNumber : string
+  cost : number
+  secure : boolean
 }
 
-const Review: React.FC<ReviewProps> = ({ flightDetails, passengerDetails, email, phoneNumber }) => {
+const Review: React.FC<ReviewProps> = ({ flightDetails, passengerDetails, email, phoneNumber, secure }) => {
   return (
     <div className='flex flex-col gap-6 w-full'>
       <div>
@@ -105,8 +107,61 @@ const Review: React.FC<ReviewProps> = ({ flightDetails, passengerDetails, email,
           </div>
         </div>
       </div>
+     { secure && ( <div>
+      <h3 className="font-semibold">
+        Your trip is secured
+      </h3>      
+      <div className="bg-[#FDF1DC] rounded-lg p-4">
+        <ul className="grid grid-cols-4 gap-6">
+          <InsuranceFeature
+            icon="/assets/svgs/tabler-icon-luggage.svg"
+            titleStarting="support"
+            titleEnding="24x7"
+            description="Baggage Assistance"
+            reverseTitle
+          />
+          <InsuranceFeature
+            icon="/assets/svgs/tabler-icon-ambulance.svg"
+            titleStarting="Flat"
+            titleEnding="$ 50,000"
+            description="Personal Accident"
+          />
+          <InsuranceFeature
+            icon="/assets/svgs/tabler-icon-luggage.svg"
+            titleStarting="Flat"
+            titleEnding="$ 2,500"
+            description="Loss of checked in Baggage"
+          />
+          <InsuranceFeature
+            icon="/assets/svgs/tabler-icon-clock-exclamation.svg"
+            titleStarting="Flat"
+            titleEnding="$ 2,500"
+            description="Delay of Checked in Baggage"
+          />
+        </ul>      
+      </div>
+      </div>)}
     </div>
   );
 };
 
+const InsuranceFeature: React.FC<{
+  icon: string;
+  titleStarting: string;
+  titleEnding: string;
+  description: string;
+  reverseTitle?: boolean;
+}> = ({ icon, titleStarting, titleEnding, description, reverseTitle }) => (
+  <li className="flex justify-start gap-3 bg-white rounded-lg p-4 h-fit">
+    <div className="flex-shrink-0 ">
+      <img src={icon} alt={titleStarting} />
+    </div>
+    <div className="space-y-2">
+      <p className={`font-medium text-gray-500 flex gap-2 items-end text-xs ${reverseTitle ? 'flex-row-reverse justify-end' : ''}`}>
+      {titleStarting}<strong className="text-[#008C76] text-lg leading-none">{titleEnding}</strong>
+      </p> 
+      <p className="text-xs leading-4">{description}</p>
+    </div>
+  </li>
+);
 export default Review;

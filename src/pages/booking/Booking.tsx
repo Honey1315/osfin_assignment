@@ -49,6 +49,8 @@ const Booking: React.FC = () => {
     flightNumber: "IX3486",
     flightModel: "Airbus A350-900"
   });
+  const [cost, setCost]=useState<number>(0);
+  const [secure, setSecure] = useState<boolean>(true);
   const [isPassengerDetailsValid, setIsPassengerDetailsValid] = useState(false);
   const[email, setEmail]=useState<string>('');
   const[phoneNumber, setPhoneNumber]=useState<string>('');
@@ -184,7 +186,7 @@ const Booking: React.FC = () => {
                 />
               )}
               {stepProgress === 2 && (
-                <AdditionalInfo 
+                <AdditionalInfo secure={secure} setSecure={setSecure}
                 />
               )}
               {stepProgress === 3 && (
@@ -193,6 +195,8 @@ const Booking: React.FC = () => {
                   passengerDetails={passengerDetails}
                   email={email}
                   phoneNumber={phoneNumber}
+                  cost={cost}
+                  secure={secure}
                 />
               )}
             </section>
